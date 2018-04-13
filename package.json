@@ -1,0 +1,37 @@
+{
+  "name": "reaktion",
+  "version": "0.0.1",
+  "description": "Simple state management using context",
+  "main": "./dist/reaktion.js",
+  "author": "Marvin Frachet <marvin.frachet@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "parcel build ./src/index.js -o reaktion --no-cache",
+    "format": "prettier-eslint --write \"src/**/*.js\"",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "coveralls": "^3.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.4.3",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.11.1",
+    "prettier-eslint-cli": "^4.7.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1"
+  },
+  "pre-commit": ["test", "format", "build"],
+  "jest": {
+    "setupFiles": ["./setup/jest-setup.js"]
+  }
+}
