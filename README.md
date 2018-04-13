@@ -16,7 +16,7 @@ $ yarn add mfrachet/reaktion
 
 ```javascript
 import { Provider } from "reaktion";
-import Connectedello from "./hello";
+import ConnectedHello from "./hello";
 
 const actions = {
   changeName: (state, name) => ({ ...state, name })
