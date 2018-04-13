@@ -38,8 +38,10 @@ const App = () => (
 
 ```javascript
 // ./Hello.js
-import { connect } from 'reaktion';
-const Hello = ({ name, actions: { changeName } }) => {<button onClick={() => changeName("Thomas")}>Hello {name}</button>;
+import { connect } from "reaktion";
+const Hello = ({ name, actions: { changeName } }) => (
+  <button onClick={() => changeName("Thomas")}>Hello {name}</button>
+);
 
 export default connect(Hello);
 ```
