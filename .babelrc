@@ -1,4 +1,9 @@
 {
   "presets": ["env", "react"],
+  "env": {
+    "production": {
+      "presets": ["minify"]
+    }
+  },
   "plugins": ["transform-class-properties", "transform-object-rest-spread"]
 }
