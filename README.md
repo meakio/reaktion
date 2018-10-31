@@ -2,16 +2,16 @@
 [![Coverage Status](https://coveralls.io/repos/github/mfrachet/reaktion/badge.svg?branch=master)](https://coveralls.io/github/mfrachet/reaktion?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Use the same API as [useState](https://reactjs.org/docs/hooks-state.html) React hook but for transverse state management :muscle:
+Use the same API as [useState](https://reactjs.org/docs/hooks-state.html) React hook for transverse state management :muscle:
 
 # Usage
 
 ## Installation
 
-_The module is currently not available on npm, you should install it using github_
+_Make sure you run in a project using React v16.7 or higher_
 
 ```shell
-$ yarn add mfrachet/reaktion
+$ yarn add reaktion
 ```
 
 ## In your code
