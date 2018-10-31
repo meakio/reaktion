@@ -1,7 +1,7 @@
 {
   "name": "reaktion",
   "version": "0.0.1",
-  "description": "Simple state management using context",
+  "description": "Simple state management using context & hooks",
   "main": "./dist/index.js",
   "author": "Marvin Frachet <marvin.frachet@gmail.com>",
   "license": "MIT",
@@ -11,10 +11,12 @@
     "type": "git",
     "url": "https://github.com/mfrachet/reaktion"
   },
-  "keywords": ["react", "context"],
+  "keywords": [
+    "react",
+    "context"
+  ],
   "scripts": {
-    "build":
-      "rm -rf ./dist && NODE_ENV=production babel ./src -d ./dist --ignore 'src/**/*.spec.js'",
+    "build": "rm -rf ./dist && NODE_ENV=production babel ./src -d ./dist --ignore 'src/**/*.spec.js'",
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "test": "jest"
   },
@@ -29,18 +31,24 @@
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^22.4.3",
+    "jest": "^23.6.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.11.1",
     "prettier-eslint-cli": "^4.7.1"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "react": "16.7.0-alpha.0",
+    "react-dom": "16.7.0-alpha.0"
   },
-  "pre-commit": ["test", "format", "build"],
+  "pre-commit": [
+    "test",
+    "format",
+    "build"
+  ],
   "jest": {
-    "setupFiles": ["./setup/jest-setup.js"]
+    "setupFiles": [
+      "./setup/jest-setup.js"
+    ]
   }
 }
