@@ -1,5 +1,5 @@
 import ProviderLib from "./provider";
-import connectLib from "./consumer";
+import { useStore as useStoreLib } from "./useStore";
 
-export const Provider = ProviderLib;
-export const connect = connectLib;
+export const Reaktion = ProviderLib;
+export const useStore = useStoreLib;

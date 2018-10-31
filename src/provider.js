@@ -1,32 +1,31 @@
 import React, { Component } from "react";
-import { Provider as ContextProvider } from "./context";
+import { Context } from "./context";
 
 export default class Provider extends Component {
-  constructor(props = { initialState: {}, actions: {} }) {
+  constructor(props = { initialState: {} }) {
     super(props);
+
     this.state = { ...props.initialState };
   }
 
-  mapActions = () =>
-    Object.keys(this.props.actions).reduce(
-      (acc, key) => ({
-        ...acc,
-        [key]: this.createAction(this.props.actions[key])
-      }),
-      {}
-    );
+  changeState = storeKey => newValue => {
+    if (storeKey) {
+      const newState = { [storeKey]: newValue };
 
-  createAction = actionDefinition => (...args) => {
-    const newState = actionDefinition(this.state, ...args);
-    this.setState(newState);
+      return this.setState(newState);
+    }
+
+    return this.setState(newValue);
   };
 
   render() {
-    const actions = this.mapActions();
-    const value = { actions, state: this.state };
+    const value = {
+      changeState: this.changeState,
+      state: this.state
+    };
 
     return (
-      <ContextProvider value={value}>{this.props.children}</ContextProvider>
+      <Context.Provider value={value}>{this.props.children}</Context.Provider>
     );
   }
 }

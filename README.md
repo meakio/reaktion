@@ -5,8 +5,6 @@ Simple state management based on the [new React context API](https://reactjs.org
 
 # Usage
 
-[Codesandbox available here](https://codesandbox.io/s/5vp6kyr94)
-
 ## Installation
 
 _The module is currently not available on npm, you should install it using github_
@@ -15,33 +13,34 @@ _The module is currently not available on npm, you should install it using githu
 $ yarn add mfrachet/reaktion
 ```
 
-## On the provider side
+## In your code
 
 ```javascript
-import { Provider } from "reaktion";
-import ConnectedHello from "./hello";
+import { Reaktion, useStore } from "./reaktion/src/index";
 
-const actions = {
-  changeName: (state, name) => ({ ...state, name })
+const Hello = () => {
+  /**
+   * The first element is the state node
+   * The second element is a function that mutates only that node
+   **/
+  const [name, setName] = useStore("name");
+
+  return <button onClick={() => setName("Marvin")}>Hello {name}</button>;
 };
 
-const initialState = { name: "Marvin" };
+/**
+ * Initial transverse node
+ **/
+const initialState = { name: "World" };
 
-const App = () => (
-  <Provider actions={actions} initialState={initialState}>
-    <ConnectedHello />
-  </Provider>
-);
-```
-
-## On the component side
-
-```javascript
-// ./Hello.js
-import { connect } from "reaktion";
-const Hello = ({ name, actions: { changeName } }) => (
-  <button onClick={() => changeName("Thomas")}>Hello {name}</button>
-);
-
-export default connect(Hello);
+const App = () => {
+  /**
+   * Reaktion is the state provider. It must be placed at a top level of your app
+   **/
+  return (
+    <Reaktion initialState={initialState}>
+      <Hello />
+    </Reaktion>
+  );
+};
 ```

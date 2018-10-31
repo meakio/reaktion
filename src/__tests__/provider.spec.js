@@ -1,94 +1,51 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Provider from "./../provider";
-
-jest.mock("./../context", () => ({
-  Provider: () => <div id="provider" />
-}));
-
-const getWrapper = (props = {}) => shallow(<Provider {...props} />);
+import Provider from "../provider";
+import { Context } from "../context";
 
 describe("Provider", () => {
-  describe("Provider.constructor", () => {
-    it("should have put the initialState props inside the current provider state", () => {
-      const initialState = { some: "Props" };
-      const instance = getWrapper({ initialState, actions: {} }).instance();
-      expect(instance.state).toEqual(initialState);
-    });
+  let initialState;
 
-    it("should have an initial empty state if initialState is not passed as argument", () => {
-      const instance = getWrapper({ actions: {} }).instance();
-      expect(instance.state).toEqual({});
+  const getWrapper = () => shallow(<Provider initialState={initialState} />);
+
+  beforeEach(() => {
+    initialState = { name: "Marvin" };
+  });
+
+  it("should have a a default initialstate initializer when it s not passed as props", () => {
+    const provider = new Provider();
+
+    expect(provider.state).toEqual({});
+  });
+
+  it("should have a Context.Provider with props that matches the initial state and the change state handler", () => {
+    const wrapper = getWrapper();
+
+    expect(wrapper.find(Context.Provider).prop("value")).toEqual({
+      state: initialState,
+      changeState: wrapper.instance().changeState
     });
   });
 
-  describe("Provider.createAction", () => {
-    it("should have changed the initialState with a new value", () => {
-      // Given
-      const actions = {
-        changeValue: (state, name) => ({ ...state, someKey: `Hello ${name}` })
-      };
+  it("should have changed the Context Provider value prop based on state information and parameters", () => {
+    const wrapper = getWrapper();
 
-      const initialState = {
-        someKey: "Hello marvin",
-        someOtherKey: "Hello john"
-      };
+    wrapper.instance().changeState("name")("Thomas");
 
-      const instance = getWrapper({ initialState, actions }).instance();
-
-      // When
-      const action = instance.createAction(actions.changeValue);
-      action("world");
-
-      // Then
-      expect(instance.state).toEqual({
-        ...initialState,
-        someKey: "Hello world"
-      });
+    expect(wrapper.find(Context.Provider).prop("value")).toEqual({
+      state: { name: "Thomas" },
+      changeState: wrapper.instance().changeState
     });
   });
 
-  describe("Provider.mapActions", () => {
-    it("should have changed the initialState with a new value", () => {
-      // Given
-      const actions = {
-        changeValue: (state, name) => ({ ...state, someKey: `Hello ${name}` }),
-        changeTitle: (state, name) => ({ ...state, someKey: `Hello ${name}` })
-      };
+  it("should have changed the Context Provider value prop based on state information only", () => {
+    const wrapper = getWrapper();
 
-      const initialState = {
-        someKey: "Hello marvin",
-        someOtherKey: "Hello john"
-      };
+    wrapper.instance().changeState()({ surname: "Thomas" });
 
-      const instance = getWrapper({ initialState, actions }).instance();
-      instance.createAction = jest.fn();
-
-      // When
-      instance.mapActions();
-
-      // Then
-      expect(instance.createAction).toHaveBeenCalledTimes(2);
-    });
-  });
-
-  describe("Provider.render", () => {
-    it("should have rendered a component with actions equals to mapActions", () => {
-      const actions = {
-        changeValue: (state, name) => ({ ...state, someKey: `Hello ${name}` }),
-        changeTitle: (state, name) => ({ ...state, someKey: `Hello ${name}` })
-      };
-
-      const initialState = {
-        someKey: "Hello marvin",
-        someOtherKey: "Hello john"
-      };
-
-      const wrapper = getWrapper({ initialState, actions });
-      const instance = wrapper.instance();
-      const mappedActions = instance.mapActions();
-
-      expect(wrapper.find("Provider").length).toEqual(1);
+    expect(wrapper.find(Context.Provider).prop("value")).toEqual({
+      state: { name: "Marvin", surname: "Thomas" },
+      changeState: wrapper.instance().changeState
     });
   });
 });
