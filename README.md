@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.org/mfrachet/reaktion.svg?branch=master)](https://travis-ci.org/mfrachet/reaktion)
+[![Coverage Status](https://coveralls.io/repos/github/mfrachet/reaktion/badge.svg?branch=master)](https://coveralls.io/github/mfrachet/reaktion?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Simple state management based on the [new React context API](https://reactjs.org/docs/context.html)
+Use the same API as [useState](https://reactjs.org/docs/hooks-state.html) React hook but for transverse state management :muscle:
 
 # Usage
 
