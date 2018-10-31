@@ -17,7 +17,7 @@ $ yarn add mfrachet/reaktion
 ## In your code
 
 ```javascript
-import { Reaktion, useStore } from "./reaktion/src/index";
+import { Reaktion, useStore } from "reaktion";
 
 const Hello = () => {
   /**
