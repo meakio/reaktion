@@ -1,2 +1,4 @@
 ./src
 ./setup
+node_modules
+coverage
