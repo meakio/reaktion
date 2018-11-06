@@ -1,4 +1,7 @@
-./src
-./setup
+src
+src/**/__tests
+setup
 node_modules
 coverage
+.*
+yarn.lock
